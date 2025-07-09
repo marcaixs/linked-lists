@@ -4,38 +4,45 @@ class LinkedList {
 
     constructor(){
         this.head = null;
-        this.tail = null;
     }
 
     //adds a new node containing value to the end of the list
     append(value){
         const node = new Node(value);
-        if (this.tail==null){
+        if(!this.head){
             this.head = node
-            this.tail = node
-        } else {
-            this.tail.nextNode = node;
+            return
         }
-        this.tail = node;
+
+        let current = this.head;
+
+        while(current.nextNode){
+            current = current.nextNode
+        }
+        current.nextNode = node;
+        
     } 
 
     //adds a new node containing value to the start of the list
     prepend(value){
         const node = new Node(value);
-        if (this.head == null){
-            this.head = node;
-        } else {
-            node.nextNode = this.head;
-            this.head = node;
+        if(!this.head){
+            this.head = node
+            return
         }
+        node.nextNode = this.head;
+        this.head = node;
     }
 
     //returns the total number of nodes in the list
     size(){
         let size = 0;
-        if (this.head == null){
-            return 0;
-        } 
+        let current = this.head;
+        while(current){
+            size ++
+            current = current.nextNode
+        }
+        return size
         
     } 
 
@@ -46,17 +53,54 @@ class LinkedList {
 
     //returns the last node in the list
     tail(){
-        return this.tail;
+        let current = this.head;
+        while(current && current.nextNode){
+            current = current.nextNode
+        }
+        return current
     } 
 
     //returns the node at the given index
-    at(index){}
+    at(index){
+        let size = 0;
+        let current = this.head;
+        while(current){
+            if(size == index){
+                return current
+            }
+            size ++
+            current = current.nextNode
+        }
+        return current;
+    }
 
     //removes the last element from the list
-    pop(){}
+    pop(){
+        if(!this.head) return; 
+
+        if(!this.head.nextNode) { 
+            this.head = null;
+            return;
+        }
+        let current = this.head;
+
+        while(current.nextNode){
+            current = current.nextNode
+        }
+        current.nextNode = null;
+    }
 
     //returns true if the passed in value is in the list and otherwise returns false.
-    contains(value){} 
+    contains(value){
+        let current = this.head;
+        while(current){
+            if(current.data == value){
+                return true
+            }
+            current = current.nextNode;
+        }
+        return false;
+    } 
 
     //returns the index of the node containing value, or null if not found.
     find(value){} 
