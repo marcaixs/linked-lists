@@ -71,7 +71,7 @@ class LinkedList {
             size ++
             current = current.nextNode
         }
-        return current;
+        return null;
     }
 
     //removes the last element from the list
@@ -103,10 +103,30 @@ class LinkedList {
     } 
 
     //returns the index of the node containing value, or null if not found.
-    find(value){} 
+    find(value){
+        let index = 0;
+        let current = this.head;
+        while(current){
+            if(current.data == value){
+                return index;
+            }
+            current = current.nextNode;
+            index ++;
+        }
+        return null;
+    } 
 
     // represents your LinkedList objects as strings, 
     // so you can print them out and preview them in the console. 
     // The format should be: ( value ) -> ( value ) -> ( value ) -> null
-    toString(){}
+    toString(){
+        let current = this.head;
+        let string = '';
+        while(current){
+            string += String(current.data) + ' -> '
+            current = current.nextNode;  
+        }
+        string += 'null'
+        return string;
+    }
 }
